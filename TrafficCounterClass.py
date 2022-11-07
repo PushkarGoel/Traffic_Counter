@@ -88,7 +88,6 @@ class TrafficCounter:
             print("There are less than 3 records so can not find top 3 hours")
             return "Can't find top 3"
 
-        # ThisTrafficCounter logic will choose arbitrary values if more than 3 records qualify for top3 hours
         top_hours = sorted(dict_timestamp, key=dict_timestamp.get, reverse=True)[:3]
         result = ""
         for hour in top_hours:
@@ -98,7 +97,7 @@ class TrafficCounter:
 
     def get_least_consecutive_hours(self):
 
-        if len(self.dict_timestamp)<3:
+        if len(self.dict_timestamp) < 3:
             print("As length is less than 3 no 1.5 hour interval can be possibly found")
             return "No contigous interval found"
 
@@ -115,7 +114,7 @@ class TrafficCounter:
             if i == 0:
                 last_time = time
                 list_count_cars.append(cur_count)
-                continue        # print(dict_daywise)
+                continue
 
             time_difference = (time - last_time).total_seconds() / 60
             if time_difference == 30:
@@ -128,7 +127,7 @@ class TrafficCounter:
 
             if streak == 2:
                 count_cars_interval = sum(list_count_cars)
-                # If the count is less than minimum current interval will be chosen
+                # If the count is less than minimum(and not equal) current interval will be chosen
                 # It means in the case of multiple intervals with minimum count, the earliest one will be chosen
                 if count_cars_interval < min_count:
                     min_count = count_cars_interval
